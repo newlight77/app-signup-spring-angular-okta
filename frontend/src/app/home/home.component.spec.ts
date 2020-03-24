@@ -2,7 +2,9 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HomeComponent } from './home.component';
 import { OKTA_CONFIG, OktaAuthModule } from '@okta/okta-angular';
 import { RouterTestingModule } from '@angular/router/testing';
+import { OktaAuthService } from '@okta/okta-angular';
 
+class OktaAuthServiceMock {}
 describe('HomeComponent', () => {
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
@@ -19,7 +21,10 @@ describe('HomeComponent', () => {
         RouterTestingModule,
         OktaAuthModule
       ],
-      providers: [{provide: OKTA_CONFIG, useValue: oktaConfig}]
+      providers: [
+        {provide: OktaAuthService, useValue: OktaAuthServiceMock},
+        {provide: OKTA_CONFIG, useValue: oktaConfig}
+      ]
     })
       .compileComponents();
   }));
