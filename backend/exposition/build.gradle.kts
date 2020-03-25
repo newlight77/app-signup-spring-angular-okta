@@ -18,11 +18,8 @@ repositories {
 
 dependencies {
 	implementation(project(":domain"))
-	implementation(project(":exposition"))
-	implementation(project(":infrastructure"))
 
 	implementation("org.springframework.boot:spring-boot-starter-web")
-	implementation("com.okta.spring:okta-spring-boot-starter:1.4.0")
 
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
@@ -33,6 +30,8 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-test") {
 		exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
 	}
+
+	runtimeOnly("com.h2database:h2")
 }
 
 tasks.withType<Test> {

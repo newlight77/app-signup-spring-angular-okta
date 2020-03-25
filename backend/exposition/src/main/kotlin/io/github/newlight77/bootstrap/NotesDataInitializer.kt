@@ -1,22 +1,22 @@
 package io.github.newlight77.bootstrap
 
-import io.github.newlight77.bootstrap.api.NotesRepository
-import io.github.newlight77.bootstrap.model.NoteDomain
-import io.github.newlight77.bootstrap.model.NoteModel
-import io.github.newlight77.bootstrap.model.toDomain
+import io.github.newlight77.bootstrap.note.model.NoteModel
+import io.github.newlight77.bootstrap.note.model.fromDomain
+import io.github.newlight77.bootstrap.note.model.toDomain
+import io.github.newlight77.bootstrap.note.service.INotesService
 import org.springframework.boot.ApplicationArguments
 import org.springframework.boot.ApplicationRunner
 import org.springframework.stereotype.Component
 
 @Component
-class DataInitializer(val repository: NotesRepository<NoteDomain, Long>) : ApplicationRunner {
+class DataInitializer(val service: INotesService<NoteModel, Long>) : ApplicationRunner {
     @Throws(Exception::class)
     override fun run(args: ApplicationArguments) {
         modelData().map { toDomain(it) }
               .forEach() {
-            repository.save(it)
+                  service.save(fromDomain(it))
         }
-        repository.findAll().forEach { println(it) }
+        service.findAll().forEach { println(it) }
     }
 }
 

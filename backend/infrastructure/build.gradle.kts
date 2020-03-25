@@ -30,8 +30,6 @@ dependencies {
 	testImplementation("org.junit.jupiter:junit-jupiter:5.6.0")
 	testImplementation("org.mockito:mockito-junit-jupiter:3.3.0")
 	testImplementation("org.assertj:assertj-core:3.11.1")
-
-	runtimeOnly("com.h2database:h2")
 }
 
 tasks.withType<Test> {

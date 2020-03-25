@@ -1,7 +1,7 @@
-package io.github.newlight77.bootstrap.entity
+package io.github.newlight77.bootstrap.note.entity
 
 import com.fasterxml.jackson.annotation.JsonIgnore
-import io.github.newlight77.bootstrap.model.NoteDomain
+import io.github.newlight77.bootstrap.note.model.NoteDomain
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.Id

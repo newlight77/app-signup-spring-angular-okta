@@ -1,7 +1,6 @@
-package io.github.newlight77.bootstrap.repository
+package io.github.newlight77.bootstrap.note.repository
 
-import io.github.newlight77.bootstrap.entity.NoteEntity
-import io.github.newlight77.bootstrap.model.NoteDomain
+import io.github.newlight77.bootstrap.note.entity.NoteEntity
 import org.springframework.data.rest.core.annotation.HandleBeforeCreate
 import org.springframework.data.rest.core.annotation.RepositoryEventHandler
 import org.springframework.stereotype.Component

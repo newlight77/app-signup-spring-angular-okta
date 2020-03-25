@@ -1,9 +1,8 @@
-package io.github.newlight77.bootstrap.api
+package io.github.newlight77.bootstrap.note.service
 
-import io.github.newlight77.bootstrap.model.NoteDomain
 import java.util.*
 
-interface NotesRepository<T, U> {
+interface INotesService<T, U> {
     fun save(note: T)
     fun update(note: T)
     fun delete(id: U)

@@ -1,10 +1,9 @@
-package io.github.newlight77.bootstrap.jpa
+package io.github.newlight77.bootstrap.note.repository
 
-import io.github.newlight77.bootstrap.entity.NoteEntity
+import io.github.newlight77.bootstrap.note.entity.NoteEntity
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
 import org.springframework.data.rest.core.annotation.RepositoryRestResource
-import org.springframework.stereotype.Repository
 import java.util.*
 
 @RepositoryRestResource(collectionResourceRel = "note", path = "notes")
