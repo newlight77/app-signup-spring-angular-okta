@@ -1,4 +1,4 @@
-package io.github.newlight77.bootstrap.config
+package io.github.newlight77.bootstrap
 
 import org.springframework.context.annotation.Bean
 import org.springframework.http.HttpMethod

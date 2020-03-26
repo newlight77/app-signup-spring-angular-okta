@@ -18,8 +18,10 @@ repositories {
 
 dependencies {
 	implementation(project(":domain"))
+	implementation(project(":infrastructure"))
 
 	implementation("org.springframework.boot:spring-boot-starter-web")
+	implementation("com.okta.spring:okta-spring-boot-starter:1.4.0")
 
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")

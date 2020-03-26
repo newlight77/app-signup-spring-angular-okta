@@ -1,4 +1,4 @@
-package io.github.newlight77.bootstrap.note.api
+package io.github.newlight77.bootstrap
 
 import io.github.newlight77.bootstrap.note.model.NoteModel
 import io.github.newlight77.bootstrap.note.service.INotesService

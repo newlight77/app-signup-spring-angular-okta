@@ -1,4 +1,4 @@
-package io.github.newlight77.bootstrap.config
+package io.github.newlight77.bootstrap
 
 import org.springframework.boot.web.servlet.FilterRegistrationBean
 import org.springframework.context.annotation.Bean

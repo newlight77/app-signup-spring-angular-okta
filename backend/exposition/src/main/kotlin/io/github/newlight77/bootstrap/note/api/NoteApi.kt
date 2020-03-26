@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping("/api/notes")
+@RequestMapping("api/notes")
 class NoteApi(val repository: INotesService<NoteModel, Long>) {
 
     @PostMapping("")
