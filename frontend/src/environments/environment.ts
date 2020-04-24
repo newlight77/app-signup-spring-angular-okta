@@ -2,14 +2,11 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+import { Config } from './config';
+
 export const environment = {
   production: false,
-  oktaConfig: {
-    issuer: 'https://dev-769725.okta.com/oauth2/default',
-    redirectUri: window.location.origin + '/implicit/callback',
-    clientId: '0oa45v45oMraZVrYA4x6',
-    pkce: true
-  }
+  config: Config.get(),
 };
 
 /*

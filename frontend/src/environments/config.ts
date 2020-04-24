@@ -1,4 +1,4 @@
-export class Env {
+export class Config {
 
     // The values that are defined here are the default values that can
     // be overridden by env.js
@@ -12,9 +12,9 @@ export class Env {
     constructor() {
     }
   
-    public static get() : Env {
+    public static get() : Config {
 
-        const env = new Env();
+        const config = new Config();
 
         // Read environment variables from browser window
         const browserWindow = window || {};
@@ -25,12 +25,12 @@ export class Env {
         // If needed, a deep merge can be performed here to merge properties instead of overwriting them.
         for (const key in browserWindowEnv) {
             if (browserWindowEnv.hasOwnProperty(key)) {
-            env[key] = window['__env'][key];
+                config[key] = window['__env'][key];
             }
         }
 
-        console.log(env);
+        console.log(config);
 
-        return env;
+        return config;
     }
 }
