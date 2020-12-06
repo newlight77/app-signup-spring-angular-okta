@@ -1,47 +1,110 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-	id("org.springframework.boot") version "2.2.5.RELEASE"
+	application
+	idea
+	`java-library`
+	id("org.springframework.boot") version "2.3.0.RELEASE"
 	id("io.spring.dependency-management") version "1.0.9.RELEASE"
 	kotlin("jvm")
-	kotlin("plugin.spring") version "1.3.61"
-	kotlin("plugin.jpa") version "1.3.61"
+	kotlin("plugin.spring") version "1.3.72"
+	kotlin("plugin.jpa") version "1.3.70"
 }
 
-group = "io.github.newlight77"
+buildscript {
+	configurations.classpath
+			.resolutionStrategy.force("com.github.pinterest:ktlint:0.36.0")
+}
+
+group = "com.newlight77.application"
 version = "0.0.1-SNAPSHOT"
-java.sourceCompatibility = JavaVersion.VERSION_11
 
 repositories {
 	mavenCentral()
 }
 
 dependencies {
-	implementation(project(":domain"))
-	implementation(project(":exposition"))
-	implementation(project(":infrastructure"))
+
+	implementation(project(":domain:authentication"))
+	implementation(project(":domain:metafile"))
+
+	implementation(project(":infrastructure:encryption"))
+	implementation(project(":infrastructure:login"))
+	implementation(project(":infrastructure:notification"))
+	implementation(project(":infrastructure:signup"))
+	implementation(project(":infrastructure:storage"))
+
+	implementation(project(":infrastructure:iam-client:iam-client-interface"))
+	implementation(project(":infrastructure:iam-client:okta-client"))
+
+	implementation("org.springframework.boot:spring-boot-devtools")
 
 	implementation("org.springframework.boot:spring-boot-starter-web")
-	implementation("com.okta.spring:okta-spring-boot-starter:1.4.0")
+	implementation("org.springframework.boot:spring-boot-starter-security")
 
-	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-	implementation("org.jetbrains.kotlin:kotlin-reflect")
-	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.5")
-	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor:1.3.5")
+	implementation("org.springframework.security:spring-security-oauth2-client")
+	implementation("org.springframework.security:spring-security-oauth2-jose")
+
+	implementation("com.okta.spring:okta-spring-boot-starter:1.4.0")
+	implementation("com.okta.jwt:okta-jwt-verifier:0.4.0")
+	implementation("com.okta.jwt:okta-jwt-verifier-impl:0.4.0")
+
+	implementation("io.jsonwebtoken:jjwt:0.9.1")
+
+	implementation("com.github.ben-manes.caffeine:caffeine:2.8.1")
+
+
+	implementation("org.springframework.boot:spring-boot-starter-data-jpa:2.3.0.RELEASE")
+	// implementation("org.postgresql:postgresql")
+	implementation("com.h2database:h2")
+
+	implementation("org.liquibase:liquibase-core:3.8.9")
+
+
+	// Testing
+	testImplementation("org.junit.jupiter:junit-jupiter:5.6.0")
+	testImplementation("org.mockito:mockito-junit-jupiter:3.6.0")
+	testImplementation("org.mockito:mockito-inline:3.6.0")
+	testImplementation("com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0")
+	testImplementation("org.assertj:assertj-core:3.11.1")
+
+	testImplementation("io.rest-assured:spring-mock-mvc:4.3.0") {
+		exclude("com.sun.xml.bind:jaxb-osgi")
+	}
+	testImplementation("io.rest-assured:xml-path:4.2.0")
+
+	testImplementation("io.cucumber:cucumber-java:5.6.0")
+	testImplementation("io.cucumber:cucumber-java8:5.6.0")
+	testImplementation("io.cucumber:cucumber-junit-platform-engine:5.6.0")
+	testImplementation("io.cucumber:cucumber-spring:5.6.0")
+	testImplementation("com.github.cukedoctor:cukedoctor-converter:1.2.1")
+
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test") {
 		exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
+		exclude("junit", "junit")
 	}
+
+	testImplementation("com.icegreen:greenmail:1.5.13")
+
 }
 
-tasks.withType<Test> {
-	useJUnitPlatform()
+application {
+	mainClassName = "com.newlight77.core.OktaAuthApplicationKt"
 }
 
-tasks.withType<KotlinCompile> {
-	kotlinOptions {
-		freeCompilerArgs = listOf("-Xjsr305=strict")
-		jvmTarget = "11"
-	}
+tasks.withType<Jar>() {
+    baseName = "app-auth-okta"
+}
+
+testlogger {
+	theme = com.adarshr.gradle.testlogger.theme.ThemeType.MOCHA_PARALLEL
+	showExceptions = true
+	showStackTraces = true
+	showFullStackTraces = true
+	showCauses = true
+	showSummary = true
+	showStandardStreams = false
+	showPassedStandardStreams = true
+	showSkippedStandardStreams = true
+	showFailedStandardStreams = true
 }

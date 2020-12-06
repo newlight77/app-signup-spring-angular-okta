@@ -6,7 +6,8 @@ import { Config } from './config';
 
 export const environment = {
   production: false,
-  config: Config.get(),
+  enableDebug: true,
+  env: Config.get().env,
 };
 
 /*

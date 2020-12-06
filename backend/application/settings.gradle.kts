@@ -1,1 +1,1 @@
-rootProject.name = "bootstrap-application"
+rootProject.name = "application-okta"

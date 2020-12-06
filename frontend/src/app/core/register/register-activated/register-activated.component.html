@@ -1,0 +1,21 @@
+<div class="grid-container">
+    <div class="grid-x">
+      <div class="small-12 medium-10 medium-offset-1 large-8 large-offset-2 cell">
+          <h2>Account Activation</h2>
+  
+        <br /> 
+        <div class="row">
+          <div class="col-12 col-xl-12">
+            <div *ngIf="emailValidationFeedback" class="alert alert-{{ emailValidationFeedback.type }}">{{ emailValidationFeedback.message }}</div>
+          </div>
+          <div class="col-12 col-xl-12">
+            <div *ngIf="phoneValidationFeedback" class="alert alert-{{ phoneValidationFeedback.type }}">{{ phoneValidationFeedback.message }}</div>
+          </div>
+          <div class="col-12 col-xl-12">
+            <div *ngIf="feedback" class="alert alert-{{ feedback.type }}">{{ feedback.message }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

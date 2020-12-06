@@ -1,0 +1,43 @@
+.header {
+  font-weight: bold;
+  font-size: 2em;
+  text-align: center;
+  padding-top: 0.3em;
+}
+
+.container {
+  font-weight: bold;
+  font-size: 1em;
+  text-align: center;
+  flex: 1 1 auto;
+  // width: 900px;
+  // outline: 1px solid blue;
+}
+
+.login-detail {
+  // font-family: 'Baloo 2', cursive;
+  // color: white;
+  text-align: center;
+  font-weight: 150;
+  font-size: 1.5em;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+
+.border-top-0 {
+  font-size: 1.2em;
+}
+
+.table-responsive {
+  text-align: center;
+  // width: 860px;
+  font-size: 0.8em;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+@media (max-width: 600px) {
+  .container {
+    height: 100%;
+  }
+}

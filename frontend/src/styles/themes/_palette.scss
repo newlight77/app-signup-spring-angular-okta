@@ -1,0 +1,135 @@
+// @import '~@angular/material/theming';
+// @import './_material_override';
+
+// mcg.mbitson.com : palette generator
+
+
+:root {
+
+  //grey
+  --primary-50 : #e7e9ea;
+  --primary-100 : #c2c7cb;
+  --primary-200 : #99a2a9;
+  --primary-300 : #707c86;
+  --primary-400 : #52606c;
+  --primary-500 : #334452;
+  --primary-600 : #2e3e4b;
+  --primary-700 : #273541;
+  --primary-800 : #202d38;
+  --primary-900 : #141f28;
+  --primary-A100 : #6bb5ff;
+  --primary-A200 : #389cff;
+  --primary-A400 : #0582ff;
+  --primary-A700 : #0075eb;
+
+  // grey darker
+  --primary-50 : #e3e4e8;
+  --primary-100 : #b9bcc5;
+  --primary-200 : #8b8f9e;
+  --primary-300 : #5c6277;
+  --primary-400 : #394059;
+  --primary-500 : #161e3c;
+  --primary-600 : #131a36;
+  --primary-700 : #10162e;
+  --primary-800 : #0c1227;
+  --primary-900 : #060a1a;
+  --primary-A100 : #5971ff;
+  --primary-A200 : #2645ff;
+  --primary-A400 : #0022f2;
+  --primary-A700 : #001fd9;
+
+  // grey dark contract
+  --primary-contrast-50 : #000000;
+  --primary-contrast-100 : #000000;
+  --primary-contrast-200 : #000000;
+  --primary-contrast-300 : #ffffff;
+  --primary-contrast-400 : #ffffff;
+  --primary-contrast-500 : #ffffff;
+  --primary-contrast-600 : #ffffff;
+  --primary-contrast-700 : #ffffff;
+  --primary-contrast-800 : #ffffff;
+  --primary-contrast-900 : #ffffff;
+  --primary-contrast-A100 : #ffffff;
+  --primary-contrast-A200 : #ffffff;
+  --primary-contrast-A400 : #ffffff;
+  --primary-contrast-A700 : #ffffff;
+
+// yellow 
+  --accent-50 : #fff9e1;
+  --accent-100 : #fff1b4;
+  --accent-200 : #ffe882;
+  --accent-300 : #ffdf50;
+  --accent-400 : #ffd82b;
+  --accent-500 : #ffd105;
+  --accent-600 : #ffcc04;
+  --accent-700 : #ffc604;
+  --accent-800 : #ffc003;
+  --accent-900 : #ffb501;
+  --accent-A100 : #ffffff;
+  --accent-A200 : #fffbf2;
+  --accent-A400 : #ffeabf;
+  --accent-A700 : #ffe2a6;
+
+  // yellow contrast
+  --accent-contrast-50 : #000000;
+  --accent-contrast-100 : #000000;
+  --accent-contrast-200 : #000000;
+  --accent-contrast-300 : #ffffff;
+  --accent-contrast-400 : #ffffff;
+  --accent-contrast-500 : #ffffff;
+  --accent-contrast-600 : #ffffff;
+  --accent-contrast-700 : #ffffff;
+  --accent-contrast-800 : #ffffff;
+  --accent-contrast-900 : #ffffff;
+  --accent-contrast-A100 : #ffffff;
+  --accent-contrast-A200 : #ffffff;
+  --accent-contrast-A400 : #ffffff;
+  --accent-contrast-A700 : #ffffff;
+
+  // blue
+  --warn-50 : #e4f3fb;
+  --warn-100 : #bbe0f5;
+  --warn-200 : #8eccee;
+  --warn-300 : #61b7e7;
+  --warn-400 : #3fa7e1;
+  --warn-500 : #1d98dc;
+  --warn-600 : #1a90d8;
+  --warn-700 : #1585d3;
+  --warn-800 : #117bce;
+  --warn-900 : #0a6ac5;
+  --warn-A100 : #f0f7ff;
+  --warn-A200 : #bddcff;
+  --warn-A400 : #8ac1ff;
+  --warn-A700 : #70b3ff;
+
+  // blue darker
+  --warn-50 : #e3eff5;
+  --warn-100 : #bad6e6;
+  --warn-200 : #8cbbd5;
+  --warn-300 : #5ea0c4;
+  --warn-400 : #3c8bb8;
+  --warn-500 : #1977ab;
+  --warn-600 : #166fa4;
+  --warn-700 : #12649a;
+  --warn-800 : #0e5a91;
+  --warn-900 : #084780;
+  --warn-A100 : #afd5ff;
+  --warn-A200 : #7cbaff;
+  --warn-A400 : #499fff;
+  --warn-A700 : #3092ff;
+
+  --warn-contrast-50 : #000000;
+  --warn-contrast-100 : #000000;
+  --warn-contrast-200 : #000000;
+  --warn-contrast-300 : #000000;
+  --warn-contrast-400 : #ffffff;
+  --warn-contrast-500 : #ffffff;
+  --warn-contrast-600 : #ffffff;
+  --warn-contrast-700 : #ffffff;
+  --warn-contrast-800 : #ffffff;
+  --warn-contrast-900 : #ffffff;
+  --warn-contrast-A100 : #000000;
+  --warn-contrast-A200 : #000000;
+  --warn-contrast-A400 : #000000;
+  --warn-contrast-A700 : #000000;
+}

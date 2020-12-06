@@ -1,0 +1,51 @@
+
+
+<div class="top-header" id="top-header" >
+  <img id= "header-background" class="header-background" src="assets/logo.png" width="300px">
+</div>
+
+  <div class="header-title">
+    <a>La fusion des bénéficiaires du freeelance et du salarié</a>
+  </div>
+
+
+<mat-toolbar id="primaryToolbar" class="primary-toolbar" color="primary" [ngClass]="{'mat-elevation-z5' : true, 'sticky' : isSticky}">
+
+    <button id="button-home" class="button-home" mat-button routerLink="/landing">
+      <img id= "logo" class="logo" src="assets/logo-no-text.png" width="72">
+      <a class="button-home-label">Home</a>
+    </button>
+
+    <button id="button-notes" class="button-notes" mat-button routerLink="notes">
+      <a class="button-notes-label" >Notes</a>
+    </button>
+
+    <div class="login">
+
+      <button id="button-login" class="button-login" mat-button [routerLink]="'/login'" *ngIf="!isAuthenticated">
+        <a>Login</a>
+      </button>
+      
+      <a mat-list-item [matMenuTriggerFor]="menu" class="button-profile" *ngIf="isAuthenticated">
+        <mat-icon mat-icon class="button-profile-icon">perm_identity</mat-icon>
+        <span class="button-profile-text">{{name}}</span>
+      </a>
+      <mat-menu class="button-profile" #menu="matMenu">
+          <button mat-menu-item routerLink="/login/detail">
+              <mat-icon>aspect_ratio</mat-icon>
+              <span>{{username}}</span>
+          </button>
+          <button mat-menu-item routerLink="/login/detail">
+              <mat-icon>view_list</mat-icon>
+              <span>Last logins</span>
+          </button>
+          <button mat-menu-item (click)="oktaAuth.logout()">
+            <mat-icon>highlight_off</mat-icon>
+            <span>Logout</span>
+          </button>
+        </mat-menu>
+    </div>
+
+</mat-toolbar>
+
+<div class="header-spacer" id="after-header-spacer" ></div>

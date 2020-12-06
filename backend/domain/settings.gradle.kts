@@ -1,1 +1,5 @@
-rootProject.name = "spring-hexagonal-domain"
+rootProject.name = "domain"
+
+include("authentication")
+include("metafile")
+include("note")

@@ -1,0 +1,76 @@
+
+
+<div class="container">
+  <div class="card">
+    <div class="header">
+      <h3 class="title">Search</h3>
+    </div>
+
+    <div class="content">
+      <form #f="ngForm" class="form-group">
+        
+        <div class="row">
+          <div class="col-4 col-xl-3">
+            <label for="title">Title:</label>
+          </div>
+
+          <div class="col-4 col-xl-6">
+            <input [(ngModel)]="filter.title" id="title" name="title" class="form-control">
+          </div>
+
+          <div class="col-4 col-xl-3">
+            <button (click)="search()" [disabled]="!f?.valid" class="btn btn-primary">
+              <mat-icon>search</mat-icon>
+            </button>
+          </div>
+        </div>
+        
+      </form>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-4 col-xl-3">
+        <a [routerLink]="['../notes', 'new' ]" class="btn btn-primary">
+        <mat-icon></mat-icon></a>
+      </div>
+      <div class="col-4 col-xl-6">
+        <div *ngIf="feedback" class="alert alert-{{feedback.type}}">{{ feedback.message }}</div>
+      </div>
+      <div class="col-4 col-xl-3">
+      </div>
+    </div>
+  </div>
+
+  <div class="card" *ngIf="noteList.length > 0">
+    <div class="header">
+      <h3 class="title">Notes List</h3>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table table-centered table-hover mb-0" id="datatable">
+        <thead>
+          <tr>
+            <th class="border-top-0" scope="col">Id</th>
+            <th class="border-top-0" scope="col">Title</th>
+            <th class="border-top-0" scope="col">Text</th>
+            <th class="border-top-0" scope="col" style="width:120px"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of noteList" [class.active]="item === selectedNote">
+          
+            <td>{{item.id}}</td>
+            <td>{{item.title}}</td>
+            <td>{{item.text}}</td>
+            <td style="white-space: nowrap">
+              <a [routerLink]="['../notes', item.id ]" class="btn btn-secondary">Edit</a>&nbsp;
+              <button (click)="delete(item)" class="btn btn-danger">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

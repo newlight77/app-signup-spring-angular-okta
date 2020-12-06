@@ -1,0 +1,28 @@
+.footer {
+  background-color: var(--accent-400);
+  color: var(--accent-contrast-100);
+  width: 100%;
+  position: fixed;
+  padding: 0;
+  margin: 0;
+  bottom: 0;
+  justify-content: space-between;
+  font-family: montserrat;
+  font-size: 1.4em;
+  text-align: center;
+  z-index: 1000;
+}
+
+.mat-toolbar-row {
+  font-weight: bold;
+  font-size: 1em;
+  text-align: center;
+  flex: 1 1 auto;
+  //   outline: 1px solid blue;
+}
+
+@media (max-width: 600px) {
+  .mat-toolbar-row {
+    height: 100%;
+  }
+}

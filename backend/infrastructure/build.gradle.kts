@@ -2,43 +2,40 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
 	kotlin("jvm")
-//	id("io.spring.dependency-management") version "1.0.9.RELEASE"
-	kotlin("plugin.spring") version "1.3.61"
-	kotlin("plugin.jpa") version "1.3.61"
+	idea
 }
 
-group = "io.github.newlight77"
+group = "com.newlight77.infrastructure"
 version = "0.0.1-SNAPSHOT"
-java.sourceCompatibility = JavaVersion.VERSION_1_8
 
 repositories {
 	mavenCentral()
 	maven { url = uri("https://repo.spring.io/milestone") }
+	maven { url = uri("https://kotlin.bintray.com/kotlinx") }
 }
 
-dependencies {
-	implementation(project(":domain"))
+subprojects {
 
-	implementation("org.springframework.boot:spring-boot-starter-data-jpa:2.2.5.RELEASE")
-	implementation("org.springframework.boot:spring-boot-starter-data-rest:2.2.5.RELEASE")
+	apply { plugin("java") }
+	apply { plugin("idea") }
 
-	implementation("org.jetbrains.kotlin:kotlin-reflect:1.3.70")
-	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.3.70")
-	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.5")
-	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor:1.3.5")
+	java {
+		sourceCompatibility = JavaVersion.VERSION_13
+		targetCompatibility = JavaVersion.VERSION_13
+	}
 
-	testImplementation("org.junit.jupiter:junit-jupiter:5.6.0")
-	testImplementation("org.mockito:mockito-junit-jupiter:3.3.0")
-	testImplementation("org.assertj:assertj-core:3.11.1")
-}
+	dependencies {
+		implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.10.3")
+		implementation("org.slf4j:slf4j-api:1.7.30")
+		implementation("org.jetbrains.kotlin:kotlin-reflect")
+		implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+		implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.5")
+		implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor:1.3.5")
 
-tasks.withType<Test> {
-	useJUnitPlatform()
-}
-
-tasks.withType<KotlinCompile> {
-	kotlinOptions {
-		freeCompilerArgs = listOf("-Xjsr305=strict")
-		jvmTarget = "1.8"
+		testImplementation("org.junit.jupiter:junit-jupiter:5.6.0")
+		testImplementation("org.mockito:mockito-junit-jupiter:3.6.0")
+		testImplementation("org.mockito:mockito-inline:3.6.0")
+		testImplementation("com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0")
+		testImplementation("org.assertj:assertj-core:3.11.1")
 	}
 }
