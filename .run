@@ -1,0 +1,135 @@
+#!/bin/sh
+
+#############################################
+## Global variables
+#############################################
+if [ -x /usr/bin/tput ]; then
+  red=`tput setaf 1` # error
+  green=`tput setaf 2` # nice
+  yellow=`tput setaf 3` # warning
+  blue=`tput setaf 4` # info
+  purple=`tput setaf 5` # command
+  teal=`tput setaf 6` # detail
+  white=`tput setaf 7` #
+  reset=`tput sgr0`
+fi
+
+BASE_DIR=$(dirname $0)
+ROOT_DIR="$(cd $BASE_DIR && pwd -P)"
+echo "root dir = $ROOT_DIR"
+
+DEBUG_ARG=
+SPRING_PROFILE_ARG=--spring.profiles.active=local
+CLASSPATH_DIR=
+RUN_MODE=
+ENV=
+
+LOG_FILE=$(basename $0).log
+echo "" > ${LOG_FILE}
+
+#############################################
+## Functions
+#############################################
+logInfo() {
+  echo ${reset} $@ ${reset}  2>&1 | tee -a ${LOG_FILE}
+}
+
+logError() {
+  echo ${red} $@ ${reset}  2>&1 | tee -a ${LOG_FILE}
+}
+
+logWarning() {
+  echo ${yellow} $@ ${reset}  2>&1 | tee -a ${LOG_FILE}
+}
+
+logCmd() {
+  echo ${green} $@ ${reset}  2>&1 | tee -a ${LOG_FILE}
+}
+
+usage() {
+  echo "Usage: $0 [options]"
+  echo ""
+  echo "${blue}Options:    ${reset}"
+  echo "${blue}          -e, --env =[local | dev | prod]                classpath${reset}"
+  echo "${blue}          -m, --run-mode =[boot | local | docker]                classpath${reset}"
+  echo "${blue}          -c, --classpath =[classpath]                           classpath${reset}"
+  echo "${blue}          -k, --keycloak-configFile =[keycloak.json file path]   keycloak.json file path${reset}"
+  echo "${blue}          -d, --debug                                            enable debug remotely for java app${reset}"
+  echo "${blue}          -h,  --help                                            help ${reset}"
+  echo "${blue}                                                                 ${reset}"
+  echo "${blue}By default, this will run with --spring.profiles.active=test ${reset}"
+  exit 1
+}
+
+#############################################
+## Check arguments
+#############################################
+for i in "$@"
+  do
+    case $i in
+      -e=*|--env=*)                     ENV="${i#*=}"   ;;
+      -rm=*|--run-mode=*)               RUN_MODE="${i#*=}"   ;;
+      -cp=*|--classpath=*)              CLASSPATH_DIR="${i#*=}"   ;;
+      -d|--debug)                       REMOTE_DEBUG="true"       ;;
+      -h|--help)                        usage               ;;
+      *)                                usage               ;;
+    esac
+done
+
+#############################################
+## Run
+#############################################
+
+ps -1 2>&1
+if [ "$?"x = '0x' ]; then
+  #PID=$(ps -ef | grep java | grep 'core' | cut -d' ' -f4 | awk '{print}' ORS=' ')
+  PID=$(ps -ef | grep java | grep 'core' | cut -d' ' -f4 | awk '{ printf("%s ", $0) }')
+  if [ "x$PID" != "x" ]; then
+    echo "killing springboot app with pid=${PID}"
+    kill -9 ${PID}
+  fi
+  ps -ef | grep java
+fi
+
+if [ "${ENV}" != '' ]; then
+  sed 's/\(.*=\)/export &/g' < ./backend/okta.${ENV}.env > ./.env
+else
+  sed 's/\(.*=\)/export &/g' < ./backend/okta.env > ./.env
+fi
+
+. ./.env > /dev/null
+#env
+rm .env
+
+
+if [ "${REMOTE_DEBUG}" = 'true' ]; then
+  DEBUG_ARG="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5080"
+fi
+
+if [ x"${SPRING_PROFILE}" != 'x' ]; then
+  SPRING_PROFILE_ARG="--spring.profiles.active=${SPRING_PROFILE}"
+fi
+
+if [ x"${KEYCLOAK_CONFIGFILE}" != 'x' ]; then
+  KEYCLOAK_CONFIG_ARG="--keycloak.configurationFile=${KEYCLOAK_CONFIGFILE}"
+fi
+
+if [ x"${CLASSPATH_DIR}" != 'x' ]; then
+  CLASSPATH_ARG="-cp ${CLASSPATH_DIR}"
+fi
+
+logInfo "launching the application"
+
+if [ "${RUN_MODE}" = 'boot' ]; then
+  ./gradlew :application:signup:bootRun
+fi
+
+if [ "${RUN_MODE}" = 'local' ]; then
+  echo "java ${DEBUG_ARG} ${CLASSPATH_ARG} -jar ${ROOT_DIR}/application/signup/build/libs/app-signup-backend-0.0.1-SNAPSHOT.jar ${SPRING_PROFILE_ARG} ${KEYCLOAK_CONFIG_ARG}"
+  java ${DEBUG_ARG} ${CLASSPATH_ARG} -jar ${ROOT_DIR}/application/signup/build/libs/app-signup-backend-0.0.1-SNAPSHOT.jar ${SPRING_PROFILE_ARG} ${KEYCLOAK_CONFIG_ARG}
+fi
+
+if [ "${RUN_MODE}" = 'docker' ]; then
+  echo "java ${DEBUG_ARG} ${CLASSPATH_ARG} -jar ${ROOT_DIR}/libs/app-signup-backend.jar ${SPRING_PROFILE_ARG} ${KEYCLOAK_CONFIG_ARG}"
+  java ${DEBUG_ARG} ${CLASSPATH_ARG} -jar ${ROOT_DIR}/libs/app-signup-backend.jar ${SPRING_PROFILE_ARG} ${KEYCLOAK_CONFIG_ARG}
+fi
